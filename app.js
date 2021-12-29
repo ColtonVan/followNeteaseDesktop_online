@@ -57,9 +57,7 @@ app.use(fileUpload())
 
 // static
 app.use(express.static(path.join(__dirname, 'public/dist')))
-// app.use('/client', (req, res) => {
-//   res.sendFile(__dirname + '/public/dist/index.html')
-// })
+app.use('/doc', express.static(path.join(__dirname, 'public')))
 
 // cache
 app.use(cache('2 minutes', (req, res) => res.statusCode === 200))
