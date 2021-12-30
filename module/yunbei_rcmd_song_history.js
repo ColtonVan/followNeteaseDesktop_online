@@ -1,14 +1,15 @@
-// 分享歌曲到动态
+// 云贝推歌历史记录
 
 module.exports = (query, request) => {
   const data = {
-    type: query.type || 'song', // song,playlist,mv,djprogram,djradio,noresource
-    msg: query.msg || '',
-    id: query.id || '',
+    page: JSON.stringify({
+      size: query.size || 20,
+      cursor: query.cursor || '',
+    }),
   }
   return request(
     'POST',
-    `https://music.163.com/weapi/share/friends/resource`,
+    `https://music.163.com/weapi/yunbei/rcmd/song/history/list`,
     data,
     {
       crypto: 'weapi',

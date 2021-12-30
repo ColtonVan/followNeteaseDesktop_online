@@ -1,14 +1,14 @@
-// 分享歌曲到动态
-
 module.exports = (query, request) => {
+  query.cookie.os = 'ios'
+  query.cookie.appver = '8.1.20'
   const data = {
-    type: query.type || 'song', // song,playlist,mv,djprogram,djradio,noresource
-    msg: query.msg || '',
-    id: query.id || '',
+    userId: query.uid,
+    songId: query.sid,
+    adjustSongId: query.asid,
   }
   return request(
     'POST',
-    `https://music.163.com/weapi/share/friends/resource`,
+    `https://music.163.com/api/cloud/user/song/match`,
     data,
     {
       crypto: 'weapi',

@@ -1,14 +1,15 @@
-// 分享歌曲到动态
+// 云贝推歌
 
 module.exports = (query, request) => {
   const data = {
-    type: query.type || 'song', // song,playlist,mv,djprogram,djradio,noresource
-    msg: query.msg || '',
-    id: query.id || '',
+    songId: query.id,
+    reason: query.reason || '好歌献给你',
+    scene: '',
+    fromUserId: -1,
   }
   return request(
     'POST',
-    `https://music.163.com/weapi/share/friends/resource`,
+    `https://music.163.com/weapi/yunbei/rcmd/song/submit`,
     data,
     {
       crypto: 'weapi',
