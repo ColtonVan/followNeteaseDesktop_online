@@ -42,9 +42,8 @@ app.use((req, res, next) => {
   ;(req.headers.cookie || '').split(/\s*;\s*/).forEach((pair) => {
     let crack = pair.indexOf('=')
     if (crack < 1 || crack == pair.length - 1) return
-    req.cookies[
-      decodeURIComponent(pair.slice(0, crack)).trim()
-    ] = decodeURIComponent(pair.slice(crack + 1)).trim()
+    req.cookies[decodeURIComponent(pair.slice(0, crack)).trim()] =
+      decodeURIComponent(pair.slice(crack + 1)).trim()
   })
   next()
 })
@@ -77,7 +76,6 @@ fs.readdirSync(path.join(__dirname, 'module'))
         ? special[file]
         : '/' + file.replace(/\.js$/i, '').replace(/_/g, '/')
     let question = require(path.join(__dirname, 'module', file))
-
     app.use(route, (req, res) => {
       ;[req.query, req.body].forEach((item) => {
         if (typeof item.cookie === 'string') {
